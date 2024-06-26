@@ -1,0 +1,71 @@
+print(">< Menu de reserva de mesas da Pizzaria do GAFFE >< ")
+mesas_Livres_7 = [[1], [2], [3], [4], [5], [6], [7]]
+mesas_Livres_10 = [[1], [2], [3], [4], [5], [6], [7]]
+mesas_Reservadas_7 = []
+mesas_Reservadas_10 = []
+print(f"\nNossas mesas livres das 19h são: {mesas_Livres_7}, e das 22h são: {mesas_Livres_10}")
+horário = int(input("Digite 1 para o hórario das 19h ás 20:30 ou 2 para o horário das 20:30 ás 22h: "))
+
+if horário == 1:
+    if len(mesas_Reservadas_7) <= 7:
+        while True:
+            print(" Opção 1 = Reservar Mesa\nOpção 2 = Cancelar Reserva\nOpção 3 = Visualizar mesas vazias\nOpção 4 = Alterar quantidade de pessoas da reserva!\nOpção 5 = Sair!")
+            opc = int(input(">< Digite o número da opção que deseja: "))
+            if opc == 1:
+                nome = input("Digite o nome de quem ficará a reserva: ").upper()
+                pessoas = int(input("Digite a quantidade de pessoas: "))
+                mesas_Reservadas_7.append([nome, pessoas])
+                mesas_Livres_7.pop(0)
+                print("Mesa Reservada com sucesso, Aguardamos sua presença!")
+            elif opc == 2:
+                nome = input(">< Digite o nome da pessoa que a mesa está reservada: ").upper()
+                for i in range(len(mesas_Reservadas_7)):
+                    if nome == mesas_Reservadas_7[i][0]:
+                        mesas_Reservadas_7.pop(i)
+                    elif nome != mesas_Reservadas_7[i][0]:
+                        print(">< Não existem reservas nesse nome! ><")
+            elif opc == 3:
+                print(f"Mesas reservadas as 19h: {mesas_Reservadas_7}, Mesas livres as 19h: {mesas_Livres_7}")
+                print(f"Mesas reservadas as 20:30h: {mesas_Reservadas_10}, Mesas livres as 20:30: {mesas_Livres_10}")
+            elif opc == 4:
+                nome = input("Insira o nome de quem está a reserva:").upper()
+                pessoas = int(input("Digite a nova quantidade de pessoas para a mesa: "))
+                for i in mesas_Reservadas_7:
+                    if nome == i[0]:
+                        quantidade = int(input(">< Digite a nova quantidade: "))
+                        i[1] = quantidade    
+            elif opc == 5:
+                break    
+if horário == 2:            
+    if len(mesas_Reservadas_10) <= 7:
+        while True:
+            print("Opção 1 = Reservar Mesa\n Opção 2 = Cancelar Reserva\n Opção 3 = Visualizar mesas vazias")
+            opc = int(input(">< Digite o número da opção que deseja: "))
+            if opc == 1:
+                nome = input("Digit o nome de quem ficará a reserva: ").upper()
+                pessoas = int(input("Digite a quantidade de pessoas: "))
+                mesas_Reservadas_10.append([nome, pessoas])
+                mesas_Livres_10.pop(0)
+                print("Mesa Reservada com sucesso, Aguardamos sua presença!")
+            elif opc == 2:
+                nome = input(">< Digite o nome da pessoa que a mesa está reservada: ")  
+                for i in range(len(mesas_Reservadas_10)):
+                    if nome == mesas_Reservadas_10[i][0]:
+                        mesas_Reservadas_10.pop(i)
+                    elif nome != mesas_Reservadas_10[i][0]:
+                        print(">< Não existem reservas nesse nome! ><")
+            elif opc == 3:
+                print(f"Mesas reservadas as 19h: {mesas_Reservadas_7}, Mesas livres as 19h: {mesas_Livres_7}")
+                print(f"Mesas reservadas as 20:30h: {mesas_Reservadas_10}, Mesas livres as 20:30: {mesas_Livres_10}")
+            elif opc == 4:
+                nome = input("Insira o nome de quem está a reserva:").upper()
+                pessoas = int(input("Digite a nova quantidade de pessoas para a mesa: "))
+                for i in mesas_Reservadas_10:
+                    if nome == i[0]:
+                        quantidade = int(input(">< Digite a nova quantidade: "))
+                        i[1] = quantidade
+            elif opc == 5:
+                break
+else:
+    print("Opção inválida")
+print(f"Mesas reservadas para o horário das 19h: {mesas_Reservadas_7}, mesas reservadas ás 22h: {mesas_Reservadas_10} !")
