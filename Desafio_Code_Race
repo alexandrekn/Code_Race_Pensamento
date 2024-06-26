@@ -22,6 +22,7 @@ if horário == 1:
                 for i in range(len(mesas_Reservadas_7)):
                     if nome == mesas_Reservadas_7[i][0]:
                         mesas_Reservadas_7.pop(i)
+                        print(f"Mesa cancelada com sucesso: {nome}")
                     elif nome != mesas_Reservadas_7[i][0]:
                         print(">< Não existem reservas nesse nome! ><")
             elif opc == 3:
@@ -52,6 +53,7 @@ if horário == 2:
                 for i in range(len(mesas_Reservadas_10)):
                     if nome == mesas_Reservadas_10[i][0]:
                         mesas_Reservadas_10.pop(i)
+                        print(f"Mesa cancelada com sucesso: {nome}")
                     elif nome != mesas_Reservadas_10[i][0]:
                         print(">< Não existem reservas nesse nome! ><")
             elif opc == 3:
