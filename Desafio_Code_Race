@@ -1,73 +1,132 @@
-print(">< Menu de reserva de mesas da Pizzaria do GAFFE >< ")
-mesas_Livres_7 = [[1], [2], [3], [4], [5], [6], [7]]
-mesas_Livres_10 = [[1], [2], [3], [4], [5], [6], [7]]
-mesas_Reservadas_7 = []
-mesas_Reservadas_10 = []
-print(f"\nNossas mesas livres das 19h são: {mesas_Livres_7}, e das 22h são: {mesas_Livres_10}")
-horário = int(input("Digite 1 para o hórario das 19h ás 20:30 ou 2 para o horário das 20:30 ás 22h: "))
+reservadas = []
+livres = [30,30,30,30]
+def reservar_mesa():
+    nome = input(">< Digite seu nome: ")
+    horario = int(input(">< Digite o horário que deseja reservar a mesa (19,20,21 ou 22h): "))
+    qtd = int(input(">< Digite a qtd de pessoas para a reserva: "))
+    for reserva in reservadas:
+        if reserva[0] == nome:
+            print(f">< Você já possui uma reserva hoje. ><")
+    if qtd %2 != 0:
+        qtd_mesas = (qtd + 1)/2
+    else:
+        qtd_mesas = qtd / 2
+    if horario == 19:
+        if qtd_mesas > livres[0] or qtd_mesas  > livres[1]:
+            print(">< Quantidade de mesas não disponivel para seu horário! ><")
+        else:
+            print(">< Reserva feita com sucesso! ><")
+            livres[0] -= qtd_mesas
+            livres[1] -= qtd_mesas
+            reservadas.append([nome,horario,qtd])
+    elif horario == 20:
+        if qtd_mesas > livres[1] or qtd_mesas  > livres[2]:
+            print(">< Quantidade de mesas não disponivel para seu horário! ><")
+        else:
+            print(">< Reserva feita com sucesso! ><")
+            livres[1] -= qtd_mesas
+            livres[2] -= qtd_mesas
+            reservadas.append([nome,horario,qtd])
+    elif horario == 21:
+        if qtd_mesas > livres[2] or qtd_mesas  > livres[3]:
+            print(">< Quantidade de mesas não disponivel para seu horário! ><")
+        else:
+            print(">< Reserva feita com sucesso! ><")
+            livres[2] -= qtd_mesas
+            livres[3] -= qtd_mesas
+            reservadas.append([nome,horario,qtd])
+    elif horario == 22:
+        if qtd_mesas > livres[3]:
+            print(">< Quantidade de mesas não disponivel para seu horário! ><")
+        else:
+            print(">< Reserva feita com sucesso! ><")
+            livres[3] -= qtd_mesas
+            reservadas.append([nome,horario,qtd])
+    else:
+        print(">< Horário inválido! ><")
 
-if horário == 1:
-    if len(mesas_Reservadas_7) <= 7:
-        while True:
-            print(" Opção 1 = Reservar Mesa\nOpção 2 = Cancelar Reserva\nOpção 3 = Visualizar mesas vazias\nOpção 4 = Alterar quantidade de pessoas da reserva!\nOpção 5 = Sair!")
-            opc = int(input(">< Digite o número da opção que deseja: "))
-            if opc == 1:
-                nome = input("Digite o nome de quem ficará a reserva: ").upper()
-                pessoas = int(input("Digite a quantidade de pessoas: "))
-                mesas_Reservadas_7.append([nome, pessoas])
-                mesas_Livres_7.pop(0)
-                print("Mesa Reservada com sucesso, Aguardamos sua presença!")
-            elif opc == 2:
-                nome = input(">< Digite o nome da pessoa que a mesa está reservada: ").upper()
-                for i in range(len(mesas_Reservadas_7)):
-                    if nome == mesas_Reservadas_7[i][0]:
-                        mesas_Reservadas_7.pop(i)
-                        print(f"Mesa cancelada com sucesso: {nome}")
-                    elif nome != mesas_Reservadas_7[i][0]:
-                        print(">< Não existem reservas nesse nome! ><")
-            elif opc == 3:
-                print(f"Mesas reservadas as 19h: {mesas_Reservadas_7}, Mesas livres as 19h: {mesas_Livres_7}")
-                print(f"Mesas reservadas as 20:30h: {mesas_Reservadas_10}, Mesas livres as 20:30: {mesas_Livres_10}")
-            elif opc == 4:
-                nome = input("Insira o nome de quem está a reserva:").upper()
-                pessoas = int(input("Digite a nova quantidade de pessoas para a mesa: "))
-                for i in mesas_Reservadas_7:
-                    if nome == i[0]:
-                        quantidade = int(input(">< Digite a nova quantidade: "))
-                        i[1] = quantidade    
-            elif opc == 5:
-                break    
-if horário == 2:            
-    if len(mesas_Reservadas_10) <= 7:
-        while True:
-            print("Opção 1 = Reservar Mesa\n Opção 2 = Cancelar Reserva\n Opção 3 = Visualizar mesas vazias")
-            opc = int(input(">< Digite o número da opção que deseja: "))
-            if opc == 1:
-                nome = input("Digit o nome de quem ficará a reserva: ").upper()
-                pessoas = int(input("Digite a quantidade de pessoas: "))
-                mesas_Reservadas_10.append([nome, pessoas])
-                mesas_Livres_10.pop(0)
-                print("Mesa Reservada com sucesso, Aguardamos sua presença!")
-            elif opc == 2:
-                nome = input(">< Digite o nome da pessoa que a mesa está reservada: ")  
-                for i in range(len(mesas_Reservadas_10)):
-                    if nome == mesas_Reservadas_10[i][0]:
-                        mesas_Reservadas_10.pop(i)
-                        print(f"Mesa cancelada com sucesso: {nome}")
-                    elif nome != mesas_Reservadas_10[i][0]:
-                        print(">< Não existem reservas nesse nome! ><")
-            elif opc == 3:
-                print(f"Mesas reservadas as 19h: {mesas_Reservadas_7}, Mesas livres as 19h: {mesas_Livres_7}")
-                print(f"Mesas reservadas as 20:30h: {mesas_Reservadas_10}, Mesas livres as 20:30: {mesas_Livres_10}")
-            elif opc == 4:
-                nome = input("Insira o nome de quem está a reserva:").upper()
-                pessoas = int(input("Digite a nova quantidade de pessoas para a mesa: "))
-                for i in mesas_Reservadas_10:
-                    if nome == i[0]:
-                        quantidade = int(input(">< Digite a nova quantidade: "))
-                        i[1] = quantidade
-            elif opc == 5:
-                break
-else:
-    print("Opção inválida")
-print(f"Mesas reservadas para o horário das 19h: {mesas_Reservadas_7}, mesas reservadas ás 22h: {mesas_Reservadas_10} !")
+def cancelar_reserva():
+    nome = input(">< Digite seu nome: ")
+    horario = int(input(">< Digite o horário da reserva que deseja cancelar (19, 20, 21 ou 22h): "))
+    
+    encontrada = False
+    for reserva in reservadas:
+        if reserva[0] == nome and reserva[1] == horario:
+            reservadas.remove(reserva)
+            if horario == 19:
+                livres[0] += (reserva[2] + 1) // 2
+                livres[1] += (reserva[2] + 1) // 2
+            elif horario == 20:
+                livres[1] += (reserva[2] + 1) // 2
+                livres[2] += (reserva[2] + 1) // 2
+            elif horario == 21:
+                livres[2] += (reserva[2] + 1) // 2
+                livres[3] += (reserva[2] + 1) // 2
+            elif horario == 22:
+                livres[3] += (reserva[2] + 1) // 2
+            encontrada = True
+            print(">< Reserva cancelada com sucesso! ><")
+            break
+    
+    if encontrada == False:
+        print(">< Reserva não encontrada. ><")
+
+def listar_todas_reservas():
+    if not reservadas:
+        print(">< Não há reservas feitas ainda. ><")
+    else:
+        print(">< Reservas: ")
+        for reserva in reservadas:
+            print(f">< Cliente: {reserva[0]}, Horário: {reserva[1]}h, Quantidade de pessoas: {reserva[2]}. ><")
+
+def listar_reservas_cliente():
+    nome = input(">< Digite o nome do cliente para listar suas reservas: ")
+    encontradas = False
+    for reserva in reservadas:
+        if reserva[0] == nome:
+            print(f">< Cliente: {reserva[0]}, Horário: {reserva[1]}h, Quantidade de pessoas: {reserva[2]}. ><")
+            encontradas = True
+    if encontradas == False:
+        print(f">< Não foram encontradas reservas para o cliente {nome}. ><")
+
+def mesas_disponiveis():
+    horario = int(input(">< Digite o horário que deseja verificar (19, 20, 21 ou 22h): "))
+    if horario == 19:
+        print(f">< No horário das {horario}h, há {livres[0]} mesas disponíveis. ><")
+    elif horario == 20:
+        print(f">< No horário das {horario}h, há {livres[1]} mesas disponíveis. ><")
+    elif horario == 21:
+        print(f">< No horário das {horario}h, há {livres[2]} mesas disponíveis. ><")
+    elif horario == 22:
+        print(f">< No horário das {horario}h, há {livres[3]} mesas disponíveis. ><")
+    else:
+        print(">< Horário inválido! ><")
+
+def main():
+    while True:
+        print("\n><><><><>< Bem-vindo ao sistema de reservas de mesas GAFFE ><><><><><")
+        print("1 >< Reservar uma mesa")
+        print("2 >< Cancelar uma reserva")
+        print("3 >< Listar todas as reservas")
+        print("4 >< Listar reservas de uma pessoa")
+        print("5 >< Verificar mesas disponíveis em um horário")
+        print("0 >< Sair do programa")
+        
+        opcao = int(input(">< Digite sua escolha: "))
+        
+        if opcao == 1:
+            reservar_mesa()
+        elif opcao == 2:
+            cancelar_reserva()
+        elif opcao == 3:
+            listar_todas_reservas()
+        elif opcao == 4:
+            listar_reservas_cliente()
+        elif opcao == 5:
+            mesas_disponiveis()
+        elif opcao == 0:
+            break
+        else:
+            print(">< Opção inválida. Tente novamente. ><")
+
+main()
